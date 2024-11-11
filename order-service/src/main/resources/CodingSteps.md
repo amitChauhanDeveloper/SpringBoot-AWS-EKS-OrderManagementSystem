@@ -17,11 +17,31 @@ docker exec -it kafka kafka-console-consumer.sh --bootstrap-server localhost:909
 zookeeper-server-start.sh config/zookeeper.properties
 kafka-server-start.sh config/server.properties
 
+#short command configuration
+nano .bashrc
+# Function to consume messages from a given topic
+kafka-consume() {
+    docker exec -it springboot-aws-eks-ordermanagementsystem_kafka_1 /opt/bitnami/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic "$1" --from-beginning
+}
 
-docker exec -it springboot-aws-eks-ordermanagementsystem_kafka_1 /opt/bitnami/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic order_placed --from-beginning
+# Function to delete a given topic
+kafka-delete() {
+    docker exec -it springboot-aws-eks-ordermanagementsystem_kafka_1 /opt/bitnami/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --topic "$1" --delete
+}
 
-docker exec -it springboot-aws-eks-ordermanagementsystem_kafka_1 /opt/bitnami/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --topic order_placed --delete
+# Function to list all topics
+kafka-list() {
+    docker exec -it springboot-aws-eks-ordermanagementsystem_kafka_1 /opt/bitnami/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
+}
 
-docker exec -it springboot-aws-eks-ordermanagementsystem_kafka_1 /opt/bitnami/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
+short command
+kafka-consume topicname
+kafka-delete topicname
+kafka-list
+
+check service log 
+docker-compose logs -f orderservice
+docker-compose logs -f productservice
+
 
 
