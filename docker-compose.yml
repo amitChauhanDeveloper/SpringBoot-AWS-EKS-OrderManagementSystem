@@ -9,6 +9,8 @@ services:
       - "2181:2181"
     networks:
       - app-network
+    volumes:
+      - zookeeper-data:/bitnami/zookeeper  # Persist Zookeeper data store outside container
 
   kafka:
     image: 'bitnami/kafka:latest'
@@ -24,6 +26,8 @@ services:
       - "9092:9092"
     networks:
       - app-network
+    volumes:
+      - kafka-data:/bitnami/kafka  # Persist Kafka data store outside container
 
   orderservice:
     build:
@@ -66,3 +70,9 @@ services:
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  zookeeper-data:  # Volume for Zookeeper data store outside container
+    driver: local
+  kafka-data:  # Volume for Kafka data store outside container
+    driver: local
