@@ -10,6 +10,5 @@ COPY target/ordermanagement-product-service.jar ordermanagement-product-service.
 # Expose the port your application runs on
 EXPOSE 8081
 
-# Run the JAR file
+# Run the application with the specified profile
 ENTRYPOINT ["java", "-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}", "-jar", "ordermanagement-product-service.jar"]
-

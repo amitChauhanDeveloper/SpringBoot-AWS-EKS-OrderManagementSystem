@@ -5,7 +5,7 @@ services:
       context: ./order-service
       dockerfile: Dockerfile
     environment:
-      - PRODUCT_SERVICE_URL=http://productservice:8083/api/products
+      - PRODUCT_SERVICE_URL=https://springboot-aws-eks-ordermanagementsystem.onrender.com/api/products
       # - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     networks:
       - app-network
