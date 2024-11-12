@@ -5,7 +5,7 @@
 5. Write the service logic
 6. Kafka producer class
 
-#amit
+# amit
 zookeeper-server-start.sh config/zookeeper.properties
 kafka-server-start.sh config/server.properties
 
@@ -34,6 +34,5 @@ kafka-list
 check service log 
 docker-compose logs -f orderservice
 docker-compose logs -f productservice
-
 
 
