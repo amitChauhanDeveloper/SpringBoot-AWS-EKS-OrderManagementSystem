@@ -29,14 +29,14 @@ services:
     volumes:
       - kafka-data:/bitnami/kafka  # Persist Kafka data store outside container
 
-  postgres:
-    image: postgres:latest
-    environment:
-      - POSTGRES_USER=database_v4h4_user
-      - POSTGRES_PASSWORD=HLTrCG1qhvulxymVpjsA3hF666fKWHEI
-      - POSTGRES_DB=database_v4h4
-    networks:
-      - app-network
+  # postgres:
+  #   image: postgres:latest
+  #   environment:
+  #     - POSTGRES_USER=database_v4h4_user
+  #     - POSTGRES_PASSWORD=HLTrCG1qhvulxymVpjsA3hF666fKWHEI
+  #     - POSTGRES_DB=database_v4h4
+  #   networks:
+  #     - app-network
 
   orderservice:
     build:
@@ -49,9 +49,9 @@ services:
       - postgres
     environment:
       - PRODUCT_SERVICE_URL=http://productservice:8083/api/products
-      - SPRING_DATASOURCE_URL=dpg-cspi69e8ii6s73bn9egg-a.oregon-postgres.render.com/database_v4h4
-      - SPRING_DATASOURCE_USERNAME=database_v4h4_user
-      - SPRING_DATASOURCE_PASSWORD=HLTrCG1qhvulxymVpjsA3hF666fKWHEI
+      # - SPRING_DATASOURCE_URL=jdbc:postgresql://dpg-cspi69e8ii6s73bn9egg-a.oregon-postgres.render.com/database_v4h4
+      # - SPRING_DATASOURCE_USERNAME=database_v4h4_user
+      # - SPRING_DATASOURCE_PASSWORD=HLTrCG1qhvulxymVpjsA3hF666fKWHEI
     networks:
       - app-network
 
@@ -66,9 +66,9 @@ services:
       - postgres
     environment:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://192.168.7.41:5432/postgres
-      - SPRING_DATASOURCE_USERNAME=user
-      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://dpg-cspi69e8ii6s73bn9egg-a.oregon-postgres.render.com/database_v4h4
+      - SPRING_DATASOURCE_USERNAME=database_v4h4_user
+      - SPRING_DATASOURCE_PASSWORD=HLTrCG1qhvulxymVpjsA3hF666fKWHEI
     networks:
       - app-network
 
