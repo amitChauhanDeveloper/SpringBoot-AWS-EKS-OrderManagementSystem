@@ -21,11 +21,6 @@ FROM openjdk:21-jdk-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Set environment variables (You can also reference Render's environment variables here)
-ENV SPRING_DATASOURCE_URL=jdbc:postgresql://192.168.7.41:5432/postgres
-ENV SPRING_DATASOURCE_USERNAME=user
-ENV SPRING_DATASOURCE_PASSWORD=admin
-
 # Copy the generated JAR files from the build stage
 COPY --from=build /app/order-service/target/ordermanagement-order-service.jar /app/ordermanagement-order-service.jar
 COPY --from=build /app/product-service/target/ordermanagement-product-service.jar /app/ordermanagement-product-service.jar
