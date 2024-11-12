@@ -10,5 +10,5 @@ COPY target/ordermanagement-order-service.jar ordermanagement-order-service.jar
 # Expose the port your application runs on
 EXPOSE 8082
 
-# Run the JAR file
-ENTRYPOINT ["java", "-jar", "ordermanagement-order-service.jar"]
+# Run the application with the specified profile
+ENTRYPOINT ["java", "-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}", "-jar", "ordermanagement-order-service.jar"]

@@ -11,4 +11,5 @@ COPY target/ordermanagement-product-service.jar ordermanagement-product-service.
 EXPOSE 8081
 
 # Run the JAR file
-ENTRYPOINT ["java", "-jar", "ordermanagement-product-service.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}", "-jar", "ordermanagement-product-service.jar"]
+

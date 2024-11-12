@@ -6,8 +6,7 @@ services:
       dockerfile: Dockerfile
     environment:
       - PRODUCT_SERVICE_URL=http://productservice:8083/api/products
-      - SPRING_PROFILES_ACTIVE=prod
-      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      # - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     networks:
       - app-network
 
@@ -15,8 +14,7 @@ services:
     build:
       context: ./product-service
       dockerfile: Dockerfile
-    environment:
-      - SPRING_PROFILES_ACTIVE=prod
-      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    # environment:
+      # - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     networks:
       - app-network
