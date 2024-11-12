@@ -1,5 +1,5 @@
 -- Insert sample products
-INSERT INTO dev.products (id,name, sku_code, description, quantity, price) VALUES
+INSERT INTO products (id,name, sku_code, description, quantity, price) VALUES
 (1,'Samsung Refrigerator', 'samref002', 'Double door refrigerator', 5, 45000),
 (2,'Sony LED TV', 'sonytv003', '55 inch 4K LED TV', 8, 60000),
 (3,'Apple iPhone', 'iph13pm005', 'iPhone 13 Pro Max', 20, 120000),
