@@ -82,8 +82,8 @@ public class OrderServiceImpl implements OrderService {
         try {
         log.info("Order placed successfully, sending 'Order Placed' event to Kafka...");
         // order = orderRepository.save(order);
-        orderDto.setId(order.getId());
-        orderProducer.sendOrderEvent(orderDto, "placed");  // Send event to Kafka
+        // orderDto.setId(order.getId());
+        // orderProducer.sendOrderEvent(orderDto, "placed");  // Send event to Kafka
             
         } catch (Exception e_) {}
 
@@ -158,12 +158,11 @@ public class OrderServiceImpl implements OrderService {
         
         try {
             log.info("Order cancelled successfully, sending 'Order cancelled' event to Kafka...");
-            orderRepository.save(order);
-            orderProducer.sendOrderEvent(orderDto, "cancelled"); // Send cancellation event with full order data
+            // orderRepository.save(order);
+            // orderProducer.sendOrderEvent(orderDto, "cancelled"); // Send cancellation event with full order data
                 
             } catch (Exception e_) {}
 
-        // orderProducer.sendOrderEvent(orderDto, "cancelled");  // Send cancellation event with full order data
         return new OrderResponse(order);  // Return updated order response
     }
     private OrderDto convertToDto(Order order) {

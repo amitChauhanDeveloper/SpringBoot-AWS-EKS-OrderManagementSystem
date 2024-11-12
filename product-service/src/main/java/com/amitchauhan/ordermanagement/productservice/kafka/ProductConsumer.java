@@ -24,7 +24,7 @@ public class ProductConsumer {
     private static final String ORDER_CANCELLED_TOPIC = "order_cancelled";
 
 
-    @KafkaListener(topics = ORDER_PLACED_TOPIC)
+    // @KafkaListener(topics = ORDER_PLACED_TOPIC)
     public void consumeOrderPlaced(String orderMessage)  {
 
         log.info("Order received {}", orderMessage);
@@ -54,7 +54,7 @@ public class ProductConsumer {
     }
 
     // Listener for order cancellation, increasing SKU levels
-    @KafkaListener(topics = ORDER_CANCELLED_TOPIC)
+    // @KafkaListener(topics = ORDER_CANCELLED_TOPIC)
     public void consumeOrderCancelled(String orderMessage) {
         log.info("Order received for cancellation: {}", orderMessage);
 
