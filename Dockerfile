@@ -1,5 +1,10 @@
-# Use Maven 3.9.2 with OpenJDK 21 for the build stage
-FROM maven:3.9.2-openjdk-21-slim AS build
+# Start from an OpenJDK 21 image
+FROM openjdk:21-jdk-slim AS build
+
+# Install Maven 3.9.2 manually
+RUN apt-get update && apt-get install -y curl && \
+    curl -sSL https://archive.apache.org/dist/maven/maven-3/3.9.2/binaries/apache-maven-3.9.2-bin.tar.gz | tar xz -C /opt && \
+    ln -s /opt/apache-maven-3.9.2/bin/mvn /usr/local/bin/mvn
 
 # Set the working directory inside the container
 WORKDIR /app
