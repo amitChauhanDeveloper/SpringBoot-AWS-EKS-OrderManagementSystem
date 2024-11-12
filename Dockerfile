@@ -12,6 +12,9 @@ WORKDIR /app
 # Copy the pom.xml and source code to the container
 COPY . /app
 
+# Specify the default profile in the Dockerfile
+ENV SPRING_PROFILES_ACTIVE=prod
+
 # Run Maven to build the JAR files (both order-service and product-service)
 RUN mvn clean install -DskipTests
 

@@ -1,3 +1,99 @@
+# version: '3.3'
+
+# services:
+#   zookeeper:
+#     image: 'bitnami/zookeeper:latest'
+#     environment:
+#       - ALLOW_ANONYMOUS_LOGIN=yes
+#     ports:
+#       - "2181:2181"
+#     networks:
+#       - app-network
+#     volumes:
+#       - zookeeper-data:/bitnami/zookeeper  # Persist Zookeeper data store outside container
+
+#   kafka:
+#     image: 'bitnami/kafka:latest'
+#     environment:
+#       - KAFKA_BROKER_ID=1
+#       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+#       - KAFKA_LISTENERS=PLAINTEXT://:9092
+#       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+#       - ALLOW_PLAINTEXT_LISTENER=yes
+#     depends_on:
+#       - zookeeper
+#     ports:
+#       - "9092:9092"
+#     networks:
+#       - app-network
+#     volumes:
+#       - kafka-data:/bitnami/kafka  # Persist Kafka data store outside container
+
+#   # postgres:
+#   #   image: postgres:latest
+#   #   environment:
+#   #     - POSTGRES_USER=database_v4h4_user
+#   #     - POSTGRES_PASSWORD=HLTrCG1qhvulxymVpjsA3hF666fKWHEI
+#   #     - POSTGRES_DB=database_v4h4
+#   #   networks:
+#   #     - app-network
+
+#   orderservice:
+#     build:
+#       context: ./order-service
+#       dockerfile: Dockerfile
+#     ports:
+#       - "8081:8081"
+#     depends_on:
+#       - kafka
+#       # - postgres
+#     environment:
+#       - PRODUCT_SERVICE_URL=http://productservice:8083/api/products
+#       # - SPRING_DATASOURCE_URL=jdbc:postgresql://dpg-cspi69e8ii6s73bn9egg-a.oregon-postgres.render.com/database_v4h4
+#       # - SPRING_DATASOURCE_USERNAME=database_v4h4_user
+#       # - SPRING_DATASOURCE_PASSWORD=HLTrCG1qhvulxymVpjsA3hF666fKWHEI
+#     networks:
+#       - app-network
+
+#   productservice:
+#     build:
+#       context: ./product-service
+#       dockerfile: Dockerfile
+#     ports:
+#       - "8083:8083"
+#     depends_on:
+#       - kafka
+#       # - postgres
+#     environment:
+#       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+#       # - SPRING_DATASOURCE_URL=jdbc:postgresql://dpg-cspi69e8ii6s73bn9egg-a.oregon-postgres.render.com/database_v4h4
+#       # - SPRING_DATASOURCE_USERNAME=database_v4h4_user
+#       # - SPRING_DATASOURCE_PASSWORD=HLTrCG1qhvulxymVpjsA3hF666fKWHEI
+#     networks:
+#       - app-network
+
+#   nginx:
+#     image: nginx:latest
+#     ports:
+#       - "7777:80"  # Expose NGINX on port 7777
+#     depends_on:
+#       - orderservice
+#       - productservice
+#     volumes:
+#       - ./nginx.conf:/etc/nginx/nginx.conf  # NGINX config file
+#     networks:
+#       - app-network
+
+# networks:
+#   app-network:
+#     driver: bridge
+
+# volumes:
+#   zookeeper-data:  # Volume for Zookeeper data store outside container
+#     driver: local
+#   kafka-data:  # Volume for Kafka data store outside container
+#     driver: local
+
 version: '3.3'
 
 services:
@@ -10,7 +106,7 @@ services:
     networks:
       - app-network
     volumes:
-      - zookeeper-data:/bitnami/zookeeper  # Persist Zookeeper data store outside container
+      - zookeeper-data:/bitnami/zookeeper
 
   kafka:
     image: 'bitnami/kafka:latest'
@@ -27,60 +123,17 @@ services:
     networks:
       - app-network
     volumes:
-      - kafka-data:/bitnami/kafka  # Persist Kafka data store outside container
-
-  postgres:
-    image: postgres:latest
-    environment:
-      - POSTGRES_USER=database_v4h4_user
-      - POSTGRES_PASSWORD=HLTrCG1qhvulxymVpjsA3hF666fKWHEI
-      - POSTGRES_DB=database_v4h4
-    networks:
-      - app-network
-
-  orderservice:
-    build:
-      context: ./order-service
-      dockerfile: Dockerfile
-    ports:
-      - "8081:8081"
-    depends_on:
-      - kafka
-      - postgres
-    environment:
-      - PRODUCT_SERVICE_URL=http://productservice:8083/api/products
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://dpg-cspi69e8ii6s73bn9egg-a.oregon-postgres.render.com/database_v4h4
-      - SPRING_DATASOURCE_USERNAME=database_v4h4_user
-      - SPRING_DATASOURCE_PASSWORD=HLTrCG1qhvulxymVpjsA3hF666fKWHEI
-    networks:
-      - app-network
-
-  productservice:
-    build:
-      context: ./product-service
-      dockerfile: Dockerfile
-    ports:
-      - "8083:8083"
-    depends_on:
-      - kafka
-      - postgres
-    environment:
-      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://dpg-cspi69e8ii6s73bn9egg-a.oregon-postgres.render.com/database_v4h4
-      - SPRING_DATASOURCE_USERNAME=database_v4h4_user
-      - SPRING_DATASOURCE_PASSWORD=HLTrCG1qhvulxymVpjsA3hF666fKWHEI
-    networks:
-      - app-network
+      - kafka-data:/bitnami/kafka
 
   nginx:
     image: nginx:latest
     ports:
-      - "7777:80"  # Expose NGINX on port 7777
+      - "7777:80" # Expose NGINX on port 7777
     depends_on:
       - orderservice
       - productservice
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf  # NGINX config file
+      - ./nginx.conf:/etc/nginx/nginx.conf # NGINX config file
     networks:
       - app-network
 
@@ -89,7 +142,7 @@ networks:
     driver: bridge
 
 volumes:
-  zookeeper-data:  # Volume for Zookeeper data store outside container
-    driver: local
-  kafka-data:  # Volume for Kafka data store outside container
-    driver: local
+  zookeeper-data:
+    driver: local # Volume for Zookeeper data store outside container
+  kafka-data:
+    driver: local # Volume for Kafka data store outside container
