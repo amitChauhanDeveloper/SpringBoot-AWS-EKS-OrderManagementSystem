@@ -66,9 +66,9 @@ services:
       - postgres
     environment:
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://dpg-cspi69e8ii6s73bn9egg-a.oregon-postgres.render.com/database_v4h4
-      - SPRING_DATASOURCE_USERNAME=database_v4h4_user
-      - SPRING_DATASOURCE_PASSWORD=HLTrCG1qhvulxymVpjsA3hF666fKWHEI
+      # - SPRING_DATASOURCE_URL=jdbc:postgresql://dpg-cspi69e8ii6s73bn9egg-a.oregon-postgres.render.com/database_v4h4
+      # - SPRING_DATASOURCE_USERNAME=database_v4h4_user
+      # - SPRING_DATASOURCE_PASSWORD=HLTrCG1qhvulxymVpjsA3hF666fKWHEI
     networks:
       - app-network
 
