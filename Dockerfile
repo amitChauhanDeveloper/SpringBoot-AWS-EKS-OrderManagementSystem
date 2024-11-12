@@ -1,15 +1,21 @@
 # Stage 1: Build Order Service
-FROM openjdk:21-jdk as order-service-build
+FROM openjdk:21-jdk
 
 WORKDIR /app
 
-# Copy order service JAR from the correct path
-COPY order-service/target/ordermanagement-order-service.jar /app/ordermanagement-order-service.jar
+# Copy the application's JAR file to the container
+COPY target/ordermanagement-order-service.jar ordermanagement-order-service.jar
+
+# Run the JAR file
+ENTRYPOINT ["java", "-jar", "ordermanagement-order-service.jar"]
 
 # Stage 2: Build Product Service
-FROM openjdk:21-jdk as product-service-build
+FROM openjdk:21-jdk
 
 WORKDIR /app
 
 # Copy product service JAR from the correct path
-COPY product-service/target/ordermanagement-product-service.jar /app/ordermanagement-product-service.jar
+COPY target/ordermanagement-product-service.jar ordermanagement-product-service.jar
+
+# Run the JAR file
+ENTRYPOINT ["java", "-jar", "ordermanagement-product-service.jar"]
