@@ -31,7 +31,6 @@ services:
 
   orderservice:
     environment:
-      - PRODUCT_SERVICE_URL=https://springboot-aws-eks-ordermanagementsystem.onrender.com/api/products
       - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}  # Dynamically set profile
 
   productservice:
