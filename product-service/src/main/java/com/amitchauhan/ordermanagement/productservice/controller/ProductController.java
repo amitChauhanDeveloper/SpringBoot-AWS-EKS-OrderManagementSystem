@@ -1,22 +1,22 @@
 package com.amitchauhan.ordermanagement.productservice.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.amitchauhan.ordermanagement.productservice.dto.ProductAvailabilityResponse;
 import com.amitchauhan.ordermanagement.productservice.dto.ProductDTO;
 import com.amitchauhan.ordermanagement.productservice.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 @RestController
-@ControllerAdvice
 @RequestMapping("/api/products")
+@RequiredArgsConstructor
 public class ProductController {
-    @Autowired
-    private ProductService productService;
 
-      @GetMapping
+    private final ProductService productService;
+
+    @GetMapping
    public List<ProductDTO> getAllProducts() {
        return productService.getAllProducts();
    }
