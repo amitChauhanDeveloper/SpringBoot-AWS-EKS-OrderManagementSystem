@@ -29,7 +29,7 @@ COPY --from=build /app/order-service/target/ordermanagement-order-service.jar /a
 COPY --from=build /app/product-service/target/ordermanagement-product-service.jar /app/ordermanagement-product-service.jar
 
 # Expose the required ports for both services
-EXPOSE 8082 8083
+EXPOSE 8082 8081
 
 # Run both services in the background using `sh -c` to start both JAR files
 CMD ["sh", "-c", "java -jar /app/ordermanagement-order-service.jar & java -jar /app/ordermanagement-product-service.jar"]
