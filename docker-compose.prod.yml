@@ -4,6 +4,8 @@ services:
     build:
       context: ./order-service
       dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
     environment:
       - PRODUCT_SERVICE_URL=https://springboot-aws-eks-ordermanagementsystem.onrender.com/api/products
       # - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
@@ -14,6 +16,8 @@ services:
     build:
       context: ./product-service
       dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
     # environment:
       # - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     networks:

@@ -32,13 +32,13 @@ public class GlobalExceptionHandler {
     }
 
     // Handle other general exceptions
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGeneralException(Exception ex, WebRequest request) {
-        ErrorResponse errorResponse = new ErrorResponse(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
-                "Something went wrong!"
-        );
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    // @ExceptionHandler(Exception.class)
+    // public ResponseEntity<ErrorResponse> handleGeneralException(Exception ex, WebRequest request) {
+    //     ErrorResponse errorResponse = new ErrorResponse(
+    //             HttpStatus.INTERNAL_SERVER_ERROR.value(),
+    //             HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
+    //             "Something went wrong!"
+    //     );
+    //     return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
 }

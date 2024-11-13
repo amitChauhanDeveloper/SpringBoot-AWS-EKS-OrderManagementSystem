@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService{
 
-    private final ProductRepository productRepository;
+  private final ProductRepository productRepository;
 
   @Override
   public void reduceProductQuantity(String skuCode, int quantity) {
